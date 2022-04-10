@@ -11,6 +11,7 @@ module Network.HTTP.Types.Method
 , methodConnect
 , methodOptions
 , methodPatch
+, methodQuery
 , StdMethod(..)
 , parseMethod
 , renderMethod
@@ -30,7 +31,7 @@ import           GHC.Generics         (Generic)
 type Method = B.ByteString
 
 -- | HTTP Method constants.
-methodGet, methodPost, methodHead, methodPut, methodDelete, methodTrace, methodConnect, methodOptions, methodPatch :: Method
+methodGet, methodPost, methodHead, methodPut, methodDelete, methodTrace, methodConnect, methodOptions, methodPatch, methodQuery :: Method
 methodGet     = renderStdMethod GET
 methodPost    = renderStdMethod POST
 methodHead    = renderStdMethod HEAD
@@ -40,9 +41,10 @@ methodTrace   = renderStdMethod TRACE
 methodConnect = renderStdMethod CONNECT
 methodOptions = renderStdMethod OPTIONS
 methodPatch   = renderStdMethod PATCH
+methodQuery   = renderStdMethod QUERY
 
--- | HTTP standard method (as defined by RFC 2616, and PATCH which is defined
---   by RFC 5789).
+-- | HTTP standard method (as defined by RFC 2616, PATCH which is defined
+--   by RFC 5789, and QUERY defined by RFC ????).
 data StdMethod
     = GET
     | POST
@@ -53,6 +55,7 @@ data StdMethod
     | CONNECT
     | OPTIONS
     | PATCH
+    | QUERY
     deriving (Read, Show, Eq, Ord, Enum, Bounded, Ix, Typeable, Data, Generic)
 -- These are ordered by suspected frequency. More popular methods should go first.
 -- The reason is that methodList is used with lookup.
